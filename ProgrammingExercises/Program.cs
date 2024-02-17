@@ -3,4 +3,3 @@ using ProgrammingExercises;
 //Console.WriteLine(Basics.LongestWord("Write a C# Sharp Program to display the following pattern using the alphabet."));
 //Basics.CelsiusToKelAndFah(30);
 //Basics.ResultOfTwoDigitEquations(3,2);
-Console.WriteLine(Basics.HexToDec("2A5"));

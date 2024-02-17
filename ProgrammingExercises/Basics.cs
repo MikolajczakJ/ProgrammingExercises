@@ -246,7 +246,107 @@ namespace ProgrammingExercises
             }
             return result;
         }
-        //Następne zad32
+        /// <summary>
+        /// If length is greater than 3, returns 4 last characters of string, else returns unaltered value
+        /// </summary>
+        public static string FourCopies(string value)
+        {
+            if (value.Length<4)
+                return value;
+            string sub = value[(value.Length - 4)..];
+            return $"{sub} {sub} {sub} {sub}";
+        }
+        /// <summary>
+        /// Checks whether given value is multiple of modulos
+        /// </summary>
+        /// <param name="value">value being checed whether it is multiplication of modulo</param>
+        /// <returns>True if value is multiplication of any given value in modulos, else false</returns>
+        public static bool IsMultipleOf(this int value, params int[] modulos)
+        {
+            foreach (int modulo in modulos)
+            {
+                if (value%modulo==0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// Checks whether one of the two values is smaller than 100 and other one is greater than 200
+        /// </summary>
+        /// <returns>True if one of the two values is smaller than 100 and other one is greater than 200</returns>
+        public static bool OneLesserOneGreater(int firstVal, int secondVal)
+            => (firstVal < 100 && secondVal > 200) || (secondVal < 100 && firstVal > 200);
+        /// <summary>
+        /// Checks whether value is withing range (inclusive)
+        /// </summary>
+        /// <returns>True when value is within inclusive range of min-max</returns>
+        private static bool IsInRange(this int value, int min, int max) => (value >= min && value <= max);
 
+        /// <summary>
+        /// Finds min and max values in array of ints
+        /// </summary>
+        /// <returns>Tuple (min int,max int)</returns>
+        public static (int, int) MinAndMax(params int[] values)
+        {
+            int min=int.MaxValue, max=int.MinValue;
+            foreach (var item in values)
+            {
+                if (item > max)
+                    max = item;
+                if (item < min)
+                    min = item;
+            }
+            return(min, max);
+        }
+        /// <summary>
+        /// Counts how many times specific character appears in string
+        /// </summary>
+        /// <param name="searchedChar">Character to be searched in string</param>
+        /// <returns>A number of occurances in text</returns>
+        public static int CharOccurence(string text, char searchedChar)
+        {
+            int counter = 0;
+            foreach (var item in text)
+            {
+                if (item==searchedChar)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+        /// <summary>
+        /// If string length is smaller than 4 return whole string in uppercase, else returns first 4 characters in lowercase and rest normally
+        /// </summary>
+        /// <returns>whole string in uppercase if text length is <4, else returns first 4 characters in lowercase and rest normally</returns>
+        public static string ToUpperOrLower(string text)
+        {
+            if (text.Length<4)
+            {
+                return text.ToUpper();
+            }
+            return text[0..4].ToLower() + text[4..];
+        }
+        /// <summary>
+        /// Takes characters that are located only on odd indexes
+        /// </summary>
+        /// <returns>string with characters that were located on odd indexes in given text </returns>
+        public static string OnlyOddChars(string text)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool flag = false;
+            foreach (var item in text) 
+            {
+                if (flag)
+                {
+                    stringBuilder.Append(item);
+                }
+                flag = !flag;
+            }
+            return stringBuilder.ToString();
+
+        }
     }
 }
