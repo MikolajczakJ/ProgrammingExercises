@@ -191,6 +191,62 @@ namespace ProgrammingExercises
             } while (primeCount < count);
             return sum;
         }
-        //Zad26^
+        /// <summary>
+        /// Sums up digits of given value
+        /// </summary>
+        /// <returns>Sum of the given value</returns>
+        public static int SumOfDigits(int value)
+        {
+            int sum = 0;
+            do
+            {
+                sum += value % 10;
+                value /= 10;
+
+            } while (value>0);
+            return sum;
+        }
+        /// <summary>
+        /// Reverses words in the sentence
+        /// </summary>
+        public static string ReverseSentence(string sentence)
+        {
+            string[] words = sentence.Split(' ');
+            return String.Join(' ', words.Reverse());
+        }
+        /// <summary>
+        /// Returns size of file in bytes
+        /// </summary>
+        /// <param name="filePath">Directory to selected file</param>
+        public static long SizeOfFile(string filePath)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            return fileInfo.Length;
+        }
+        /// <summary>
+        /// Converts value from hexadecimal do decimal
+        /// </summary>
+        /// <param name="hex">hexadecimal representation of value</param>
+        /// <returns>Value in decimal</returns>
+        public static int HexToDec(string hex) => int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+
+        /// <summary>
+        /// Multiplies each element in array with coresponding element in other array
+        /// </summary>
+        /// <returns>Array with prodtucts of multiplication</returns>
+        public static int[] MultiplyArrays(int[] collectionA, int[] collectionB)
+        {
+            int[] result = new int[collectionA.Length];
+            if (collectionA.Count() == collectionB.Count())
+            {
+                for (int i = 0; i < collectionA.Count(); i++)
+                {
+                    result[i] = collectionA[i]* collectionB[i];
+                }
+            }
+            return result;
+        }
+        //Następne zad32
+
     }
 }
