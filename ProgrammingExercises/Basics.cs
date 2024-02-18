@@ -348,5 +348,148 @@ namespace ProgrammingExercises
             return stringBuilder.ToString();
 
         }
+        /// <summary>
+        /// Counts how many times selectedValue occures in IEnumerable
+        /// </summary>
+        /// <returns>Returns count of the selectedValue occurances in given IEnumerable </returns>
+        public static int ValOccurance(int selectedValue, IEnumerable<int> values)
+        {
+            int counter = 0;
+            foreach (var item in values)
+            {
+                if (item==selectedValue)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+        /// <summary>
+        /// Checks beggining and end of array to see if selected value appears
+        /// </summary>
+        /// <returns>True if appears on at least one of two positions, otherwise false</returns>
+        public static bool StartsOrEndsWith(int searchedValue, int[] ints)
+        {
+            if (ints.Length>=1)
+            {
+                return ints[0] == searchedValue || ints[^1] == searchedValue;
+            }
+            return false;
+        }
+        /// <summary>
+        /// Checks whether array starts and ends with the same value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns>True if </returns>
+        public static bool EndEqualToStart(int[] array)
+            => (array.Length > 1) ? array[0] == array[^1] : false;
+        /// <summary>
+        /// Checks whether starting or ending values are equal in both arrays
+        /// </summary>
+        /// <returns>True if starting OR ending values are equal in both arrays</returns>
+        public static bool EqualEndsOrStarts(int[] firstArray, int[] secondArray)
+            => (firstArray.Length > 1 && secondArray.Length > 1) ? firstArray[0] == secondArray[0] || firstArray[^1] == secondArray[^1] : false;
+        /// <summary>
+        /// Moves all elements in array by one index to the left
+        /// </summary>
+        /// <returns>New array with all values shifted to the left by one, first value will be last one</returns>
+        public static int[] MoveToLeft(int[] array)
+        {
+            int[] result = new int[array.Length];
+            int storage = array[0];
+            array.CopyTo(result, 0);
+            for (int i = 0; i < array.Length-1; i++)
+            {
+                result[i] = result[i + 1];
+            }
+            result[^1] = storage;
+            return result;
+        }
+        /// <summary>
+        /// Compares beggining and the end of array and returns greater value
+        /// </summary>
+        /// <returns>Greater alue between starting and ending array values</returns>
+        public static int GreaterOnTheEnds(int[] array) => array.Length<2? int.MinValue : int.Max(array[0], array[^1]);
+        /// <summary>
+        /// Checks whether collection contains odd value
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns>True when collection has odd value in it, else false</returns>
+        public static bool ContainsOdd(IEnumerable<int> collection)
+            => collection.FirstOrDefault(x => x % 2 != 0) != 0;
+        /// <summary>
+        /// Checks given year and returns proper century
+        /// </summary>
+        /// <returns>Proper century based on given year</returns>
+        public static short WhichCentury(short year)
+            =>(year % 100 != 0)? (short)((year / 100) + 1):(short)(year / 100);
+        /// <summary>
+        /// Looks for greates product in given array
+        /// </summary>
+        /// <param name="ints"></param>
+        /// <returns>Greatest (multiplicand,multiplier) in given array </returns>
+        public static (int, int) GetLargestProductComponents(int[] ints)
+        {
+            int multiplicand= int.MinValue,
+                multiplier= int.MinValue,
+                greatestProduct = int.MinValue;
+            for (int i = 0; i < ints.Length-1; i++)
+            {
+                if (greatestProduct < ints[i] * ints[i + 1])
+                {
+                    greatestProduct = ints[i] * ints[i + 1];
+                    multiplicand = ints[i];
+                    multiplier = ints[i + 1];
+                }
+            }
+            return (multiplicand, multiplier);
+        }
+        /// <summary>
+        /// Checks whether given string is a palindrome
+        /// </summary>
+        /// <returns>True if given string is a palindrome, else false</returns>
+        public static bool IsPalindrome(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return false;
+            }
+            for (int i = 0, j = text.Length - 1;
+                i < text.Length && j >= 0;
+                i++, j--)
+            {
+                if (text[i] != text[j]) return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Sorts array and how many integeres are missing from full range
+        /// </summary>
+        /// <returns>Count of missing values</returns>
+        public static int HowManyMissing(int[] ints)
+        {
+            int missing = 0;
+            Array.Sort(ints);
+            for (int i = 0; i < ints.Length-1; i++)
+            {
+                missing += ints[i+1] - ints[i] - 1;
+            }
+            return missing;
+        }
+        /// <summary>
+        /// checks whether array contains only increasingly larger values
+        /// </summary>
+        /// <returns>True if contains only increasingly larger values, if length <=1 false, else false</returns>
+        public static bool OnlyIncreasingValues(int[] ints)
+        {
+            if (ints.Length<=1) return false;
+
+            for (int i = 0; i < ints.Length-1; i++)
+            {
+                if (ints[i] >= ints[i+1])   return false;
+            }
+            return true;
+        }
+
     }
 }
