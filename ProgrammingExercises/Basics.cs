@@ -490,6 +490,28 @@ namespace ProgrammingExercises
             }
             return true;
         }
-
+        /// <summary>
+        /// Gives filename and extension from given directory
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>filename and extension from given directory</returns>
+        public static string FileNameInfo(string path)
+            => path.Split('/').Last();
+        /// <summary>
+        /// Replaces selected characters to new ones
+        /// </summary>
+        /// <param name="text">text for transformation</param>
+        /// <param name="chars">(oldChar, newChar)</param>
+        /// <returns>Altered text</returns>
+        public static string HashString(string text, params (char, char)[] chars)
+        {
+            foreach (var item in chars)
+            {
+                text = text.Replace(item.Item1, item.Item2);
+            }
+            return text;
+        }
+        public static bool AllLowerOrUpper(string text)
+                => text == text.ToLower() || text == text.ToUpper();       
     }
 }

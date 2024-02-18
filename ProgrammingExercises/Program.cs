@@ -1,3 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using ProgrammingExercises;
-Console.WriteLine(Basics.OnlyIncreasingValues(new int[] {1,3,2,8}));
+string a = "abcdef";
+Console.WriteLine(Basics.HashString(a,('a','9'),('b','8')));
+Console.WriteLine(a);
