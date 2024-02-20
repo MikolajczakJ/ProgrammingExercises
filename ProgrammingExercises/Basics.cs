@@ -512,6 +512,232 @@ namespace ProgrammingExercises
             return text;
         }
         public static bool AllLowerOrUpper(string text)
-                => text == text.ToLower() || text == text.ToUpper();       
+                => text == text.ToLower() || text == text.ToUpper(); 
+        /// <summary>
+        /// Removes first and last letter from given text
+        /// </summary>
+        /// <returns>String without first and last character, if string length <2 returns empty string</returns>
+        public static string RemoveFirstAndLast(string text)
+         =>(text.Length<2)? string.Empty: text.Remove(text.Length-1).Remove(0,1);
+
+        /// <summary>
+        /// Checks whether given string has two same consecutive characters 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>true when  given string has two same consecutive characters else false</returns>
+        public static bool SameConsecutiveChars(string text)
+        {
+            if (text.Length<2 || text is null) return false;
+            for (int i = 0; i < text.Length - 1; i++)
+            {
+                if (text[i] == text[i + 1])
+                    return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// Checks whether average of given collection is a whole number 
+        /// </summary>
+        /// <returns>True if Average is a whole number</returns>
+        public static bool AverageIsWhole(IEnumerable<int> collection)
+            => collection.Average(x => x)%1==0;
+        /// <summary>
+        /// Orders all characters in the string alphabetically (characters must be all lowercase or all uppercase)
+        /// </summary>
+        /// <returns>Alphabetically ordered string</returns>
+        public static string OrderAlphabetically(string text)
+            =>new string(text.Order().ToArray());
+
+        /// <summary>
+        /// Checks whether string length is even
+        /// </summary>
+        /// <returns>True if string length is even</returns>
+        public static bool IsEvenLength(string text)
+            => text.Length % 2 == 0;
+        /// <summary>
+        /// Calculates n-th odd number
+        /// </summary>
+        /// <returns> n-th odd number</returns>
+        public static int NthOddNumber(int n) => (n * 2) - 1;
+
+        /// <summary>
+        /// Converts int value to ascii char
+        /// </summary>
+        /// <returns>character with ascii character coresponding to its id</returns>
+        public static char IntToChar(int val) => (char)(val % 127);
+        /// <summary>
+        /// Calculates sum of squared values 
+        /// </summary>
+        /// <param name="ints"></param>
+        /// <returns>sum of squared values</returns>
+        public static int SumOfSquares(params int[] ints)
+            => ints.Sum(x => x*x);
+        /// <summary>
+        /// Converts IEnumerable of objects to IEnumerable of strings with GetType information
+        /// </summary>
+        /// <returns>IEnumerable of strings with GetType information</returns>
+        public static IEnumerable<string> ObjectsToString(IEnumerable<object> objects)
+        {
+            foreach (var item in objects)
+            {
+                yield return item is null? "NULL" : $"{item} Type: {item.GetType()}";
+            }
+        }
+        /// <summary>
+        /// Removes characters that are not in english alphabet
+        /// </summary>
+        /// <returns>String only with letters from english alphabet</returns>
+        public static string KeepOnlyLetters(string text)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var item in text)
+            {
+                if ((item>='a' && item <='z')|| (item >= 'A' && item <= 'Z'))
+                    stringBuilder.Append(item);
+            }
+            return stringBuilder.ToString();
+        }
+        
+        /// <summary>
+        /// checks whether given character is a letter 
+        /// </summary>
+        /// <returns>True when given character is uppercase or lowercase letter</returns>
+        private static bool IsLetter(this char character) => (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
+       
+        /// <summary>
+        /// checks whether given character is a digit 
+        /// </summary>
+        /// <returns>True when given character is a digit</returns>
+        private static bool IsDigit(this char character) => character >= '0' && character <= '9';
+
+        /// <summary>
+        /// Removes vowels from the text
+        /// </summary>
+        /// <returns>Text without the vowels</returns>
+        public static string RemoveVowels(string text)
+            =>new string(text.Where(x => !x.IsVowel()).ToArray());
+        /// <summary>
+        /// Checks whether given char is a vowel
+        /// </summary>
+        /// <returns>True if given char is a vowel, else false</returns>
+        private static bool IsVowel(this char c)
+           =>"AEIOUaeiou".IndexOf(c) != -1;
+        /// <summary>
+        /// Searches for lowercase letters in text and adds indexes to the collection
+        /// </summary>
+        /// <returns>Collection of indexes of lowercase letters</returns>
+        public static IEnumerable<int> GetIndexesOfLowercase(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (char.IsLower(text[i]))
+                    yield return i;
+            }
+        }
+        /// <summary>
+        ///  Finds the cumulative sum of an array of numbers.
+        ///  For example, the cumulative sums of the sequence {x, y, z,...}, are x, x+y , x+y+z
+        /// </summary>
+        /// <returns>Collection of cumulative sums of the sequence type of float </returns>
+        public static IEnumerable<float> CumulativeSum(this float[] values)
+        {
+            float sum;
+            for (int i = 0; i < values.Count(); i++)
+            {
+                sum = 0;
+                for (int j = 0; j <= i; j++)
+                {
+                    sum += values[j];
+                }
+                yield return sum;
+            }
+        }
+
+        /// <summary>
+        /// Counts digits and letters in given text
+        /// </summary>
+        /// <returns>int tuple (digit count, letter count)</returns>
+        public static (int, int) DigitAndLetterCount(string text)
+        {
+            int digitCount = 0,
+                letterCount = 0;
+            foreach (var item in text)
+            {
+                if (item.IsLetter()) letterCount++;
+
+                else if (item.IsDigit()) digitCount++;
+            }
+            return (digitCount, letterCount);
+        }
+
+        /// <summary>
+        /// Calculates the sum of interior angles in polygon with edges equal to edgeCount
+        /// </summary>
+        /// <param name="edgeCount">Ammount of edges in polygon</param>
+        /// <returns>Sum of the interior angles in polygon </returns>
+        public static int SumOfInteriorAngles(int edgeCount) => (edgeCount - 2 ) * 180; 
+
+        /// <summary>
+        /// Converts given value to binary and counts ones and zeroes
+        /// </summary>
+        /// <returns>int tuple (zeroesCount, onesCouns)</returns>
+        public static (int, int) DigitCountInBinary(int value)
+        {
+                int zeroes = 0,
+                ones = 0;
+            string binaryVal = Convert.ToString(value, 2);
+            foreach (var item in binaryVal)
+            {
+                if (item=='1')
+                    ones++;
+                else
+                    zeroes++;
+
+            }
+            return (zeroes, ones);
+        }
+
+        /// <summary>
+        /// Searches through object array and selects only integer values
+        /// </summary>
+        /// <returns>Collection of integers from given object array</returns>
+        public static IEnumerable<int> KeepOnlyInts(object[] values)
+        {
+            for (int i = 0; i < values.Length; i++) 
+            {
+                if (values[i] is int)
+                    yield return (int)values[i];
+            }
+        }
+
+        /// <summary>
+        /// Searches for nearest prime number of given value
+        /// </summary>
+        /// <returns>returns nearest prime to given value</returns>
+        public static int NearestPrime(int value)
+        {
+            int nearestLowestPrime = int.MinValue,
+                nearestHigherPrime = value;
+
+            for (int i = value; i > 1; i--)
+            {
+                if (i.IsPrime())
+                {
+                    nearestLowestPrime = i;
+                    break;
+                }
+            }
+            int iteration = 0;
+            do
+            {
+                if (nearestHigherPrime.IsPrime())
+                {
+                    return nearestHigherPrime;
+                }
+                iteration++;
+                nearestHigherPrime++;
+            } while (iteration< value-nearestLowestPrime);
+            return nearestLowestPrime;
+        }
     }
 }
