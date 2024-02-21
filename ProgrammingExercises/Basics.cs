@@ -727,17 +727,45 @@ namespace ProgrammingExercises
                     break;
                 }
             }
-            int iteration = 0;
             do
             {
                 if (nearestHigherPrime.IsPrime())
                 {
                     return nearestHigherPrime;
                 }
-                iteration++;
                 nearestHigherPrime++;
-            } while (iteration< value-nearestLowestPrime);
+            } while (nearestHigherPrime< value+nearestLowestPrime);
             return nearestLowestPrime;
+        }
+        /// <summary>
+        /// Searches for longest common prefix in given string array
+        /// </summary>
+        /// <returns>Longest common prefix in given string array, if there are no prefixes returns empty string</returns>
+        public static string LongestCommonPrefix(string[] strings)
+        {
+            bool commonPrefixFound;
+            int shortestLen = int.MaxValue;
+            foreach (var item in strings)
+            {
+                if (item.Length<shortestLen)
+                {
+                    shortestLen = item.Length;
+                }
+            }
+            do
+            {
+                commonPrefixFound = true;
+                for (int i = 0; i < strings.Length - 1; i++)
+                {
+                    if (strings[i][..shortestLen] != strings[i + 1][..shortestLen])
+                    {
+                        shortestLen--;
+                        commonPrefixFound = false;
+                        break;
+                    }
+                }
+            } while (shortestLen > 0 && !commonPrefixFound);
+            return strings[0][..shortestLen];
         }
     }
 }
