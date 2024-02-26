@@ -1,12 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using ProgrammingExercises;
 
-List<string> sqr = new List<string>(LinqExercises.FindWordsInUpper("SOME of THESE words ARE IN uppercase"));
+//List<(int,string)> sqr = new List<(int,string)>(LinqExercises.FileExtCount(new string[] { "test.exe","teeeee.bat","te.txt", "te.txt" , "te.txt" }));
+//foreach (var item in sqr)
+//{
+//    Console.WriteLine($"Liczba plików: {item.Item1} Rozszerzenie: {item.Item2}");
+//}
 
-foreach (var item in sqr)
-{
-    Console.WriteLine(item);
-}
 
-Console.WriteLine(Basics.LongestCommonPrefix(new string[] { "Pacdas", "Packed", "Pace", "Pacha" }));
-//Console.WriteLine(Basics.RemoveVowels("AASDDczxcvvcsFd43565ygdb33Wą#@!!@#"));
+Console.WriteLine(DateAndTimeExc.FormatedDate(DateTime.Now));
+

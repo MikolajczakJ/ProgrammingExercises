@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,6 +113,10 @@ namespace ProgrammingExercises
                                select item;
             return firstnValues.Take(count);
         }
+        /// <summary>
+        /// Searches for words that are all in uppercase in given string
+        /// </summary>
+        /// <returns>Collection of words in uppercase</returns>
         public static IEnumerable<string> FindWordsInUpper(this string sentence)
         {
             string[] words = sentence.Split(' ');
@@ -120,5 +125,52 @@ namespace ProgrammingExercises
                               select item;
             return onlyInUpper;
         }
+        /// <summary>
+        /// Searches for Nth greatest value in collection
+        /// </summary>
+        /// <returns>returns Nth greatest value in given collection</returns>
+        public static int NthMaxVal(this IEnumerable<int> collection, int count)
+        {
+            if (count > collection.Count())
+            {
+                throw new Exception("Count greater than count of collection");
+            }
+            var max = from item in collection
+                      orderby item descending
+                      select item;
+            return max.ElementAtOrDefault(count-1);
+
+        }
+
+        /// <summary>
+        /// Counts how many files there are of each extension
+        /// </summary>
+        /// <returns>Collection of tuples of (int - extension count, string - file extension)</returns>
+        public static IEnumerable<(int, string)> FileExtCount(this IEnumerable<string> files)
+        {
+            var extensionCount = from file in files
+                                 group file by file.Substring(file.IndexOf('.') + 1) 
+                                 into fileExtension
+                                 select (fileExtension.Count(),fileExtension.Key);
+            return extensionCount;
+        }
+
+        /// <summary>
+        /// Calculates average file size in given directory
+        /// </summary>
+        /// <returns>Double vaue of average file size in given directory</returns>
+        public static double AverageFileSize(string directory)
+        {
+            var files = Directory.GetFiles(directory);
+            var avgSize = files.Select(x => new FileInfo(x).Length).Average();
+            return avgSize;
+        }
+
+        /// <summary>
+        /// Removes specified character from given collection
+        /// </summary>
+        /// <returns>Collection of characters without toRemove character</returns>
+        public static IEnumerable<char> RemoveChar(this IEnumerable<char> collection, char toRemove) 
+          =>collection.Where(character => character!= toRemove);
     }
 }
