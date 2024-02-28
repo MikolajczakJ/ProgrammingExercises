@@ -6,7 +6,10 @@ using ProgrammingExercises;
 //{
 //    Console.WriteLine($"Liczba plików: {item.Item1} Rozszerzenie: {item.Item2}");
 //}
+List<string> months = new(DateAndTimeExc.GiveAllMonths());
+Console.WriteLine(DateAndTimeExc.CountDays(new DateTime(1999,2,11),DateTime.Now));
 
-
-Console.WriteLine(DateAndTimeExc.FormatedDate(DateTime.Now));
-
+foreach (var month in months)
+{
+    Console.WriteLine(month);
+}
